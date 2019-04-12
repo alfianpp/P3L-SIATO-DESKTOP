@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIResponse.cs" />
+    <Compile Include="FormError.cs" />
+    <Compile Include="JasaService.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
