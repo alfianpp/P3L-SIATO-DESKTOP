@@ -30,10 +30,12 @@ namespace SIATO
             request.AddParameter("username", tbUsername.Text);
             request.AddParameter("password", tbPassword.Text);
             var response = client.Execute<APIResponse<Pegawai>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                SIATOForm siatoForm = new SIATOForm(this, response.Data.data);
-                siatoForm.Show();
+                Dashboard dashboard = new Dashboard(this, apiResponse.data);
+                dashboard.Show();
                 this.Hide();
             }
             else

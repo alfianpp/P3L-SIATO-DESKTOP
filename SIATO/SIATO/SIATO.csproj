@@ -33,12 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,8 +57,81 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIResponse.cs" />
+    <Compile Include="Classes\DetailPenjualanJasaService.cs" />
+    <Compile Include="Classes\DetailPenjualanSpareparts.cs" />
+    <Compile Include="Classes\Konsumen.cs" />
+    <Compile Include="Classes\LaporanPendapatanBulanan.cs" />
+    <Compile Include="Classes\LaporanPendapatanTahunan.cs" />
+    <Compile Include="Classes\LaporanPengeluaranBulanan.cs" />
+    <Compile Include="Classes\LaporanPenjualanJasa.cs" />
+    <Compile Include="Classes\LaporanSisaStok.cs" />
+    <Compile Include="Classes\LaporanSparepartsTerlaris.cs" />
+    <Compile Include="Classes\Partially\Cabang.cs" />
+    <Compile Include="Classes\Partially\JasaService.cs" />
+    <Compile Include="Classes\Partially\Kendaraan.cs" />
+    <Compile Include="Classes\Partially\Pegawai.cs" />
+    <Compile Include="Classes\Partially\Spareparts.cs" />
+    <Compile Include="Classes\Pembayaran.cs" />
+    <Compile Include="Classes\Penjualan.cs" />
+    <Compile Include="Classes\Special\SubtotalPembayaran.cs" />
+    <Compile Include="CrystalReport\PendapatanBulanan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PendapatanBulanan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\PendapatanTahunan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PendapatanTahunan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\PengeluaranBulanan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PengeluaranBulanan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\PenjualanJasa.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PenjualanJasa.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\SisaStok.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SisaStok.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\SparepartsTerlaris.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SparepartsTerlaris.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet.cs">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FormError.cs" />
     <Compile Include="JasaService.cs" />
+    <Compile Include="LaporanView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LaporanView.Designer.cs">
+      <DependentUpon>LaporanView.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,16 +139,73 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Pegawai.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SIATOForm.cs">
+    <Compile Include="PembayaranForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SIATOForm.Designer.cs">
-      <DependentUpon>SIATOForm.cs</DependentUpon>
+    <Compile Include="PembayaranForm.Designer.cs">
+      <DependentUpon>PembayaranForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PengelolaanDataPegawai.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PengelolaanDataPegawai.Designer.cs">
+      <DependentUpon>PengelolaanDataPegawai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PengelolaanDataSpareparts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PengelolaanDataSpareparts.Designer.cs">
+      <DependentUpon>PengelolaanDataSpareparts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PengelolaanJasaService.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PengelolaanJasaService.Designer.cs">
+      <DependentUpon>PengelolaanJasaService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CrystalReport\PendapatanBulanan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PendapatanBulanan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\PendapatanTahunan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PendapatanTahunan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\PengeluaranBulanan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PengeluaranBulanan.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\PenjualanJasa.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PenjualanJasa.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\SisaStok.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SisaStok.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\SparepartsTerlaris.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SparepartsTerlaris.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LaporanView.resx">
+      <DependentUpon>LaporanView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PembayaranForm.resx">
+      <DependentUpon>PembayaranForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PengelolaanDataPegawai.resx">
+      <DependentUpon>PengelolaanDataPegawai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PengelolaanJasaService.resx">
+      <DependentUpon>PengelolaanJasaService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -80,10 +216,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SIATOForm.resx">
-      <DependentUpon>SIATOForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="DataSet.xsc">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet.xss">
+      <DependentUpon>DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,6 +242,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
