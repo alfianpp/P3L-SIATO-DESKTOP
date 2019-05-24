@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace SIATO.Classes
 {
-    class DetailPenjualanSpareparts
+    class DetailPengadaanBarang
     {
         public int id { get; set; }
-        public int id_detail_penjualan { get; set; }
+        public int id_pengadaan_barang { get; set; }
         public Partially.Spareparts spareparts { get; set; }
-        public int jumlah { get; set; }
+        public int jumlah_pesan { get; set; }
+        public int jumlah_datang { get; set; }
         public double harga { get; set; }
     }
 }

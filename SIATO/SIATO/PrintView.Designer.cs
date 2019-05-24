@@ -1,6 +1,6 @@
 ﻿namespace SIATO
 {
-    partial class LaporanView
+    partial class PrintView
     {
         /// <summary>
         /// Required designer variable.
@@ -51,17 +51,17 @@
             this.crystalReportViewer.TabIndex = 0;
             this.crystalReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
-            // LaporanView
+            // PrintView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.crystalReportViewer);
-            this.Name = "LaporanView";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Laporan";
+            this.Name = "PrintView";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "PrintView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Laporan_Load);
+            this.Load += new System.EventHandler(this.PrintView_Load);
             this.ResumeLayout(false);
 
         }

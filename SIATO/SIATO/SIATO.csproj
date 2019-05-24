@@ -57,8 +57,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIResponse.cs" />
+    <Compile Include="Classes\APIResponse.cs" />
+    <Compile Include="Classes\DetailPengadaanBarang.cs" />
     <Compile Include="Classes\DetailPenjualanJasaService.cs" />
     <Compile Include="Classes\DetailPenjualanSpareparts.cs" />
+    <Compile Include="Classes\Error\Penjualan.cs" />
+    <Compile Include="Classes\JasaService.cs" />
     <Compile Include="Classes\Konsumen.cs" />
     <Compile Include="Classes\LaporanPendapatanBulanan.cs" />
     <Compile Include="Classes\LaporanPendapatanTahunan.cs" />
@@ -71,8 +75,13 @@
     <Compile Include="Classes\Partially\Kendaraan.cs" />
     <Compile Include="Classes\Partially\Pegawai.cs" />
     <Compile Include="Classes\Partially\Spareparts.cs" />
+    <Compile Include="Classes\Partially\Supplier.cs" />
+    <Compile Include="Classes\Pegawai.cs" />
     <Compile Include="Classes\Pembayaran.cs" />
+    <Compile Include="Classes\PengadaanBarang.cs" />
     <Compile Include="Classes\Penjualan.cs" />
+    <Compile Include="Classes\Spareparts.cs" />
+    <Compile Include="Classes\Special\SuratPemesanan.cs" />
     <Compile Include="Classes\Special\SubtotalPembayaran.cs" />
     <Compile Include="CrystalReport\PendapatanBulanan.cs">
       <AutoGen>True</AutoGen>
@@ -110,6 +119,12 @@
       <DependentUpon>SparepartsTerlaris.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CrystalReport\SuratPemesanan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuratPemesanan.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,7 +140,6 @@
       <DependentUpon>DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="FormError.cs" />
-    <Compile Include="JasaService.cs" />
     <Compile Include="LaporanView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,12 +152,11 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pegawai.cs" />
-    <Compile Include="PembayaranForm.cs">
+    <Compile Include="TransaksiPembayaran.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PembayaranForm.Designer.cs">
-      <DependentUpon>PembayaranForm.cs</DependentUpon>
+    <Compile Include="TransaksiPembayaran.Designer.cs">
+      <DependentUpon>TransaksiPembayaran.cs</DependentUpon>
     </Compile>
     <Compile Include="PengelolaanDataPegawai.cs">
       <SubType>Form</SubType>
@@ -163,8 +176,21 @@
     <Compile Include="PengelolaanJasaService.Designer.cs">
       <DependentUpon>PengelolaanJasaService.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintView.Designer.cs">
+      <DependentUpon>PrintView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="TransaksiPengadaanBarang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransaksiPengadaanBarang.Designer.cs">
+      <DependentUpon>TransaksiPengadaanBarang.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CrystalReport\PendapatanBulanan.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PendapatanBulanan.cs</LastGenOutput>
@@ -189,6 +215,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SparepartsTerlaris.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\SuratPemesanan.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SuratPemesanan.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -198,14 +228,20 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PembayaranForm.resx">
-      <DependentUpon>PembayaranForm.cs</DependentUpon>
+    <EmbeddedResource Include="TransaksiPembayaran.resx">
+      <DependentUpon>TransaksiPembayaran.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PengelolaanDataPegawai.resx">
       <DependentUpon>PengelolaanDataPegawai.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PengelolaanDataSpareparts.resx">
+      <DependentUpon>PengelolaanDataSpareparts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PengelolaanJasaService.resx">
       <DependentUpon>PengelolaanJasaService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintView.resx">
+      <DependentUpon>PrintView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -216,6 +252,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TransaksiPengadaanBarang.resx">
+      <DependentUpon>TransaksiPengadaanBarang.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="DataSet.xsc">
       <DependentUpon>DataSet.xsd</DependentUpon>
     </None>

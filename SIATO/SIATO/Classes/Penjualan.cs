@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using SIATO.Classes.Partially;
-
 namespace SIATO.Classes
 {
     class Penjualan
     {
         public int id { get; set; }
-        public Cabang cabang { get; set; }
+        public Partially.Cabang cabang { get; set; }
         public string jenis { get; set; }
         public Konsumen konsumen { get; set; }
         public double subtotal { get; set; }

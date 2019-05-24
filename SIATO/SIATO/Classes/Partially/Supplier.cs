@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIATO
+namespace SIATO.Classes.Partially
 {
-    class JasaService
+    class Supplier
     {
         public int id { get; set; }
         public string nama { get; set; }
-        public double harga_jual { get; set; }
     }
 }

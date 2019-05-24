@@ -36,6 +36,8 @@ namespace SIATO {
         
         private sisa_stokDataTable tablesisa_stok;
         
+        private surat_pemesananDataTable tablesurat_pemesanan;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -81,6 +83,9 @@ namespace SIATO {
                 }
                 if ((ds.Tables["sisa_stok"] != null)) {
                     base.Tables.Add(new sisa_stokDataTable(ds.Tables["sisa_stok"]));
+                }
+                if ((ds.Tables["surat_pemesanan"] != null)) {
+                    base.Tables.Add(new surat_pemesananDataTable(ds.Tables["surat_pemesanan"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -157,6 +162,16 @@ namespace SIATO {
         public sisa_stokDataTable sisa_stok {
             get {
                 return this.tablesisa_stok;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public surat_pemesananDataTable surat_pemesanan {
+            get {
+                return this.tablesurat_pemesanan;
             }
         }
         
@@ -245,6 +260,9 @@ namespace SIATO {
                 if ((ds.Tables["sisa_stok"] != null)) {
                     base.Tables.Add(new sisa_stokDataTable(ds.Tables["sisa_stok"]));
                 }
+                if ((ds.Tables["surat_pemesanan"] != null)) {
+                    base.Tables.Add(new surat_pemesananDataTable(ds.Tables["surat_pemesanan"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -314,6 +332,12 @@ namespace SIATO {
                     this.tablesisa_stok.InitVars();
                 }
             }
+            this.tablesurat_pemesanan = ((surat_pemesananDataTable)(base.Tables["surat_pemesanan"]));
+            if ((initTable == true)) {
+                if ((this.tablesurat_pemesanan != null)) {
+                    this.tablesurat_pemesanan.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -336,6 +360,8 @@ namespace SIATO {
             base.Tables.Add(this.tablepenjualan_jasa);
             this.tablesisa_stok = new sisa_stokDataTable();
             base.Tables.Add(this.tablesisa_stok);
+            this.tablesurat_pemesanan = new surat_pemesananDataTable();
+            base.Tables.Add(this.tablesurat_pemesanan);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -371,6 +397,12 @@ namespace SIATO {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private bool ShouldSerializesisa_stok() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        private bool ShouldSerializesurat_pemesanan() {
             return false;
         }
         
@@ -446,6 +478,9 @@ namespace SIATO {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         public delegate void sisa_stokRowChangeEventHandler(object sender, sisa_stokRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public delegate void surat_pemesananRowChangeEventHandler(object sender, surat_pemesananRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1947,7 +1982,7 @@ namespace SIATO {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public sisa_stokRow Addsisa_stokRow(string bulan, string sisa_stok) {
+            public sisa_stokRow Addsisa_stokRow(string bulan, int sisa_stok) {
                 sisa_stokRow rowsisa_stokRow = ((sisa_stokRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         bulan,
@@ -1983,7 +2018,7 @@ namespace SIATO {
             private void InitClass() {
                 this.columnbulan = new global::System.Data.DataColumn("bulan", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbulan);
-                this.columnsisa_stok = new global::System.Data.DataColumn("sisa_stok", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnsisa_stok = new global::System.Data.DataColumn("sisa_stok", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsisa_stok);
             }
             
@@ -2071,6 +2106,309 @@ namespace SIATO {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "sisa_stokDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class surat_pemesananDataTable : global::System.Data.TypedTableBase<surat_pemesananRow> {
+            
+            private global::System.Data.DataColumn columnnama_barang;
+            
+            private global::System.Data.DataColumn columnmerk;
+            
+            private global::System.Data.DataColumn columntipe_barang;
+            
+            private global::System.Data.DataColumn columnsatuan;
+            
+            private global::System.Data.DataColumn columnjumlah;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public surat_pemesananDataTable() {
+                this.TableName = "surat_pemesanan";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal surat_pemesananDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected surat_pemesananDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn nama_barangColumn {
+                get {
+                    return this.columnnama_barang;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn merkColumn {
+                get {
+                    return this.columnmerk;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn tipe_barangColumn {
+                get {
+                    return this.columntipe_barang;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn satuanColumn {
+                get {
+                    return this.columnsatuan;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn jumlahColumn {
+                get {
+                    return this.columnjumlah;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public surat_pemesananRow this[int index] {
+                get {
+                    return ((surat_pemesananRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event surat_pemesananRowChangeEventHandler surat_pemesananRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event surat_pemesananRowChangeEventHandler surat_pemesananRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event surat_pemesananRowChangeEventHandler surat_pemesananRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public event surat_pemesananRowChangeEventHandler surat_pemesananRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Addsurat_pemesananRow(surat_pemesananRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public surat_pemesananRow Addsurat_pemesananRow(string nama_barang, string merk, string tipe_barang, string satuan, string jumlah) {
+                surat_pemesananRow rowsurat_pemesananRow = ((surat_pemesananRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        nama_barang,
+                        merk,
+                        tipe_barang,
+                        satuan,
+                        jumlah};
+                rowsurat_pemesananRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowsurat_pemesananRow);
+                return rowsurat_pemesananRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                surat_pemesananDataTable cln = ((surat_pemesananDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new surat_pemesananDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal void InitVars() {
+                this.columnnama_barang = base.Columns["nama_barang"];
+                this.columnmerk = base.Columns["merk"];
+                this.columntipe_barang = base.Columns["tipe_barang"];
+                this.columnsatuan = base.Columns["satuan"];
+                this.columnjumlah = base.Columns["jumlah"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            private void InitClass() {
+                this.columnnama_barang = new global::System.Data.DataColumn("nama_barang", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnama_barang);
+                this.columnmerk = new global::System.Data.DataColumn("merk", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmerk);
+                this.columntipe_barang = new global::System.Data.DataColumn("tipe_barang", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntipe_barang);
+                this.columnsatuan = new global::System.Data.DataColumn("satuan", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsatuan);
+                this.columnjumlah = new global::System.Data.DataColumn("jumlah", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnjumlah);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public surat_pemesananRow Newsurat_pemesananRow() {
+                return ((surat_pemesananRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new surat_pemesananRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(surat_pemesananRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.surat_pemesananRowChanged != null)) {
+                    this.surat_pemesananRowChanged(this, new surat_pemesananRowChangeEvent(((surat_pemesananRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.surat_pemesananRowChanging != null)) {
+                    this.surat_pemesananRowChanging(this, new surat_pemesananRowChangeEvent(((surat_pemesananRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.surat_pemesananRowDeleted != null)) {
+                    this.surat_pemesananRowDeleted(this, new surat_pemesananRowChangeEvent(((surat_pemesananRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.surat_pemesananRowDeleting != null)) {
+                    this.surat_pemesananRowDeleting(this, new surat_pemesananRowChangeEvent(((surat_pemesananRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Removesurat_pemesananRow(surat_pemesananRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                DataSet ds = new DataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "surat_pemesananDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2696,10 +3034,10 @@ namespace SIATO {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string sisa_stok {
+            public int sisa_stok {
                 get {
                     try {
-                        return ((string)(this[this.tablesisa_stok.sisa_stokColumn]));
+                        return ((int)(this[this.tablesisa_stok.sisa_stokColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'sisa_stok\' in table \'sisa_stok\' is DBNull.", e);
@@ -2732,6 +3070,161 @@ namespace SIATO {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void Setsisa_stokNull() {
                 this[this.tablesisa_stok.sisa_stokColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class surat_pemesananRow : global::System.Data.DataRow {
+            
+            private surat_pemesananDataTable tablesurat_pemesanan;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            internal surat_pemesananRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablesurat_pemesanan = ((surat_pemesananDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string nama_barang {
+                get {
+                    try {
+                        return ((string)(this[this.tablesurat_pemesanan.nama_barangColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nama_barang\' in table \'surat_pemesanan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesurat_pemesanan.nama_barangColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string merk {
+                get {
+                    try {
+                        return ((string)(this[this.tablesurat_pemesanan.merkColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'merk\' in table \'surat_pemesanan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesurat_pemesanan.merkColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string tipe_barang {
+                get {
+                    try {
+                        return ((string)(this[this.tablesurat_pemesanan.tipe_barangColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'tipe_barang\' in table \'surat_pemesanan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesurat_pemesanan.tipe_barangColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string satuan {
+                get {
+                    try {
+                        return ((string)(this[this.tablesurat_pemesanan.satuanColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'satuan\' in table \'surat_pemesanan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesurat_pemesanan.satuanColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string jumlah {
+                get {
+                    try {
+                        return ((string)(this[this.tablesurat_pemesanan.jumlahColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'jumlah\' in table \'surat_pemesanan\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesurat_pemesanan.jumlahColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Isnama_barangNull() {
+                return this.IsNull(this.tablesurat_pemesanan.nama_barangColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Setnama_barangNull() {
+                this[this.tablesurat_pemesanan.nama_barangColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsmerkNull() {
+                return this.IsNull(this.tablesurat_pemesanan.merkColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetmerkNull() {
+                this[this.tablesurat_pemesanan.merkColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool Istipe_barangNull() {
+                return this.IsNull(this.tablesurat_pemesanan.tipe_barangColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void Settipe_barangNull() {
+                this[this.tablesurat_pemesanan.tipe_barangColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IssatuanNull() {
+                return this.IsNull(this.tablesurat_pemesanan.satuanColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetsatuanNull() {
+                this[this.tablesurat_pemesanan.satuanColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsjumlahNull() {
+                return this.IsNull(this.tablesurat_pemesanan.jumlahColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetjumlahNull() {
+                this[this.tablesurat_pemesanan.jumlahColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2925,6 +3418,40 @@ namespace SIATO {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public sisa_stokRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        public class surat_pemesananRowChangeEvent : global::System.EventArgs {
+            
+            private surat_pemesananRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public surat_pemesananRowChangeEvent(surat_pemesananRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public surat_pemesananRow Row {
                 get {
                     return this.eventRow;
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RestSharp;
+
+using SIATO.Classes;
 
 namespace SIATO
 {
@@ -25,8 +27,8 @@ namespace SIATO
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var client = new RestClient("http://127.0.0.1:8000/api/");
-            var request = new RestRequest("auth/pegawai", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/auth/pegawai", Method.POST);
             request.AddParameter("username", tbUsername.Text);
             request.AddParameter("password", tbPassword.Text);
             var response = client.Execute<APIResponse<Pegawai>>(request);

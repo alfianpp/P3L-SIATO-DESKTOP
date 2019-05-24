@@ -1,6 +1,4 @@
-﻿using RestSharp;
-using CrystalDecisions.CrystalReports.Engine;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using RestSharp;
+using CrystalDecisions.CrystalReports.Engine;
+
 using SIATO.Classes;
 using SIATO.CrystalReport;
 
@@ -17,273 +18,277 @@ namespace SIATO
 {
     public partial class LaporanView : Form
     {
-        private string url = "http://127.0.0.1:8000/api/";
-        private int type;
-        private int tahun;
-        private int bulan = 5;
-        private string tipe_barang = "Roda";
+        public string api_key;
 
-        private ReportClass laporan;
-        private string judul;
-
-        public LaporanView(int type, int tahun)
+        private ReportClass report;
+        private int report_code;
+        private string title;
+        public int tahun;
+        public int bulan;
+        public string tipe_barang;
+        
+        public LaporanView(int code)
         {
             InitializeComponent();
-            this.type = type;
-            this.tahun = tahun;
+            report_code = code;
 
-            switch (type)
+            switch (code)
             {
                 case 1:
-                    laporan = new SparepartsTerlaris();
-                    judul = "Spareparts Terlaris";
+                    report = new SparepartsTerlaris();
+                    title = "Spareparts Terlaris";
                     break;
 
                 case 2:
-                    laporan = new PendapatanBulanan();
-                    judul = "Pendapatan Bulanan";
+                    report = new PendapatanBulanan();
+                    title = "Pendapatan Bulanan";
                     break;
 
                 case 3:
-                    laporan = new PendapatanTahunan();
-                    judul = "Pendapatan Tahunan";
+                    report = new PendapatanTahunan();
+                    title = "Pendapatan Tahunan";
                     break;
 
                 case 4:
-                    laporan = new PengeluaranBulanan();
-                    judul = "Pendapatan Bulanan";
+                    report = new PengeluaranBulanan();
+                    title = "Pendapatan Bulanan";
                     break;
 
                 case 5:
-                    laporan = new PenjualanJasa();
-                    judul = "Penjualan Jasa";
+                    report = new PenjualanJasa();
+                    title = "Penjualan Jasa";
                     break;
 
                 case 6:
-                    laporan = new SisaStok();
-                    judul = "Sisa Stok";
+                    report = new SisaStok();
+                    title = "Sisa Stok";
                     break;
             }
 
-            this.Text = "SIATO - Laporan " + judul;
+            Text = "SIATO - " + title;
         }
 
         private void Laporan_Load(object sender, EventArgs e)
         {
-            switch (type)
+            switch (report_code)
             {
                 case 1:
-                    getLaporanSparepartsTerlaris(tahun);
+                    LaporanSparepartsTerlaris(tahun);
                     break;
 
                 case 2:
-                    getLaporanPendapatanBulanan(tahun);
+                    LaporanPendapatanBulanan(tahun);
                     break;
 
                 case 3:
-                    getLaporanPendapatanTahunan();
+                    LaporanPendapatanTahunan();
                     break;
 
                 case 4:
-                    getLaporanPengeluaranBulanan(tahun);
+                    LaporanPengeluaranBulanan(tahun);
                     break;
 
                 case 5:
-                    getLaporanPenjualanJasa(tahun, bulan);
+                    LaporanPenjualanJasa(tahun, bulan);
                     break;
 
                 case 6:
-                    getLaporanSisaStok(tahun, tipe_barang);
+                    LaporanSisaStok(tahun, tipe_barang);
                     break;
             }
 
-            if (type != 3)
+            if (report_code != 3)
             {
-                laporan.SetParameterValue("TahunParameter", tahun);
+                report.SetParameterValue("TahunParameter", tahun);
             }
 
-            if (type == 5)
+            if (report_code == 5)
             {
-                laporan.SetParameterValue("BulanParameter", getMonthName(5));
+                report.SetParameterValue("BulanParameter", getMonthName(bulan));
             }
 
-            if (type == 6)
+            if (report_code == 6)
             {
-                laporan.SetParameterValue("TipeBarangParameter", "Roda");
+                report.SetParameterValue("TipeBarangParameter", tipe_barang);
             }
 
-            crystalReportViewer.ReportSource = laporan;
+            crystalReportViewer.ReportSource = report;
         }
 
-        private void getLaporanSparepartsTerlaris(int tahun)
+        private void LaporanSparepartsTerlaris(int tahun)
         {
-            var client = new RestClient(url);
-            var request = new RestRequest("laporan/spareparts_terlaris", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/laporan/spareparts_terlaris", Method.POST);
             request.AddParameter("tahun", tahun);
+            request.AddParameter("api_key", api_key);
             var response = client.Execute<APIResponse<List<LaporanSparepartsTerlaris>>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                for (int i = 0; i < response.Data.data.Count; i++)
+                for (int i = 0; i < apiResponse.data.Count; i++)
                 {
-                    response.Data.data[i].bulan = getMonthName(Convert.ToInt32(response.Data.data[i].bulan));
+                    apiResponse.data[i].bulan = getMonthName(Convert.ToInt32(apiResponse.data[i].bulan));
                 }
-                laporan.Database.Tables["spareparts_terlaris"].SetDataSource(response.Data.data);
+                report.Database.Tables["spareparts_terlaris"].SetDataSource(apiResponse.data);
             }
             else
             {
-                MessageBox.Show(response.Data.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(apiResponse.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void getLaporanPendapatanBulanan(int tahun)
+        private void LaporanPendapatanBulanan(int tahun)
         {
-            var client = new RestClient(url);
-            var request = new RestRequest("laporan/pendapatan_bulanan", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/laporan/pendapatan_bulanan", Method.POST);
             request.AddParameter("tahun", tahun);
+            request.AddParameter("api_key", api_key);
             var response = client.Execute<APIResponse<List<LaporanPendapatanBulanan>>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                for (int i=0; i<response.Data.data.Count; i++)
+                for (int i=0; i<apiResponse.data.Count; i++)
                 {
-                    response.Data.data[i].bulan = getMonthName(Convert.ToInt32(response.Data.data[i].bulan));
+                    apiResponse.data[i].bulan = getMonthName(Convert.ToInt32(apiResponse.data[i].bulan));
                 }
-                laporan.Database.Tables["pendapatan_bulanan"].SetDataSource(response.Data.data);
+                report.Database.Tables["pendapatan_bulanan"].SetDataSource(apiResponse.data);
             }
             else
             {
-                MessageBox.Show(response.Data.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(apiResponse.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void getLaporanPendapatanTahunan()
+        private void LaporanPendapatanTahunan()
         {
-            var client = new RestClient(url);
-            var request = new RestRequest("laporan/pendapatan_tahunan", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/laporan/pendapatan_tahunan", Method.POST);
+            request.AddParameter("api_key", api_key);
             var response = client.Execute<APIResponse<List<LaporanPendapatanTahunan>>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                laporan.Database.Tables["pendapatan_tahunan"].SetDataSource(response.Data.data);
+                report.Database.Tables["pendapatan_tahunan"].SetDataSource(apiResponse.data);
             }
             else
             {
-                MessageBox.Show(response.Data.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(apiResponse.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void getLaporanPengeluaranBulanan(int tahun)
+        private void LaporanPengeluaranBulanan(int tahun)
         {
-            var client = new RestClient(url);
-            var request = new RestRequest("laporan/pengeluaran_bulanan", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/laporan/pengeluaran_bulanan", Method.POST);
             request.AddParameter("tahun", tahun);
+            request.AddParameter("api_key", api_key);
             var response = client.Execute<APIResponse<List<LaporanPengeluaranBulanan>>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                for (int i = 0; i < response.Data.data.Count; i++)
+                for (int i = 0; i < apiResponse.data.Count; i++)
                 {
-                    response.Data.data[i].bulan = getMonthName(Convert.ToInt32(response.Data.data[i].bulan));
+                    apiResponse.data[i].bulan = getMonthName(Convert.ToInt32(apiResponse.data[i].bulan));
                 }
-                laporan.Database.Tables["pengeluaran_bulanan"].SetDataSource(response.Data.data);
+                report.Database.Tables["pengeluaran_bulanan"].SetDataSource(apiResponse.data);
             }
             else
             {
-                MessageBox.Show(response.Data.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(apiResponse.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void getLaporanPenjualanJasa(int tahun, int bulan)
+        private void LaporanPenjualanJasa(int tahun, int bulan)
         {
-            var client = new RestClient(url);
-            var request = new RestRequest("laporan/penjualan_jasa", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/laporan/penjualan_jasa", Method.POST);
             request.AddParameter("tahun", tahun);
             request.AddParameter("bulan", bulan);
+            request.AddParameter("api_key", api_key);
             var response = client.Execute<APIResponse<List<LaporanPenjualanJasa>>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                laporan.Database.Tables["penjualan_jasa"].SetDataSource(response.Data.data);
+                report.Database.Tables["penjualan_jasa"].SetDataSource(apiResponse.data);
             }
             else
             {
-                MessageBox.Show(response.Data.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(apiResponse.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void getLaporanSisaStok(int tahun, string tipe_barang)
+        private void LaporanSisaStok(int tahun, string tipe_barang)
         {
-            var client = new RestClient(url);
-            var request = new RestRequest("laporan/sisa_stok", Method.POST);
+            var client = new RestClient(Settings.URL);
+            var request = new RestRequest("api/laporan/sisa_stok", Method.POST);
             request.AddParameter("tahun", tahun);
             request.AddParameter("tipe_barang", tipe_barang);
+            request.AddParameter("api_key", api_key);
             var response = client.Execute<APIResponse<List<LaporanSisaStok>>>(request);
-            if (!response.Data.error)
+
+            var apiResponse = response.Data;
+            if (!apiResponse.error)
             {
-                for (int i = 0; i < response.Data.data.Count; i++)
+                for (int i = 0; i < apiResponse.data.Count; i++)
                 {
-                    response.Data.data[i].bulan = getMonthName(Convert.ToInt32(response.Data.data[i].bulan));
+                    apiResponse.data[i].bulan = getMonthName(Convert.ToInt32(apiResponse.data[i].bulan));
                 }
-                laporan.Database.Tables["sisa_stok"].SetDataSource(response.Data.data);
+                report.Database.Tables["sisa_stok"].SetDataSource(apiResponse.data);
             }
             else
             {
-                MessageBox.Show(response.Data.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(apiResponse.message, "Terjadi Kesalahan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private string getMonthName(int number)
         {
-            string name = "";
-
             switch (number)
             {
                 case 1:
-                    name = "Januari";
-                    break;
+                    return "Januari";
 
                 case 2:
-                    name = "Februari";
-                    break;
+                    return "Februari";
 
                 case 3:
-                    name = "Maret";
-                    break;
+                    return "Maret";
 
                 case 4:
-                    name = "April";
-                    break;
+                    return "April";
 
                 case 5:
-                    name = "Mei";
-                    break;
+                    return "Mei";
 
                 case 6:
-                    name = "Juni";
-                    break;
+                    return "Juni";
 
                 case 7:
-                    name = "Juli";
-                    break;
+                    return "Juli";
 
                 case 8:
-                    name = "Agustus";
-                    break;
+                    return "Agustus";
 
                 case 9:
-                    name = "September";
-                    break;
+                    return "September";
 
                 case 10:
-                    name = "Oktober";
-                    break;
+                    return "Oktober";
 
                 case 11:
-                    name = "November";
-                    break;
+                    return "November";
 
                 case 12:
-                    name = "Desember";
-                    break;
-            }
+                    return "Desember";
 
-            return name;
+                default:
+                    return null;
+            }
         }
     }
 }

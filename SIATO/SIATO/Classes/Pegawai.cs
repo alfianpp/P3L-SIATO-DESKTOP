@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SIATO
+namespace SIATO.Classes
 {
     public class Pegawai
     {
